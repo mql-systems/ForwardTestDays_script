@@ -90,7 +90,7 @@ bool GenerateRandomDays()
       return false;
    }
    
-   int i, randDay, checkWeek, sday;
+   int i, randDay, checkWeek;
    int intervalDaysMark = g_IntervalDaysCnt-1;
    int allDaysCnt = (int)MathFloor(i_DtTestTo/86400);
    
@@ -100,15 +100,13 @@ bool GenerateRandomDays()
    
    for (i=0; i<i_GenerateDays; i++)
    {
-      do {
-         randDay = MathRandomBounds(0, intervalDaysMark);
-         sday = intervalDays[randDay];
-         intervalDays[randDay] = intervalDaysMark--;
-         checkWeek = (int)MathMod(allDaysCnt+sday, 7);
-      }
-      while (checkWeek == 2 || checkWeek == 3);
-      
-      g_Days[i] = sday;
+      randDay = MathRandomBounds(0, intervalDaysMark);
+      g_Days[i] = intervalDays[randDay];
+      ArrayRemove(intervalDays, randDay, 1);
+      intervalDaysMark--;
+      checkWeek = (int)MathMod(allDaysCnt+g_Days[i], 7);
+      if (checkWeek == 2 || checkWeek == 3)
+         i--;
    }
    
    ArraySort(g_Days);
