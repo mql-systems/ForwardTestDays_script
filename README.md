@@ -2,6 +2,8 @@
 
 A script that generates a CSV file with a table of random days for a preliminary strategy test
 
+![ForwardTestDays](https://github.com/mql-systems/ForwardTestDays_script/raw/main/image.png)
+
 ## Download
 
 - [MT4](https://github.com/mql-systems/ForwardTestDays_script/releases/download/v1.00/ForwardTestDays.ex4)
