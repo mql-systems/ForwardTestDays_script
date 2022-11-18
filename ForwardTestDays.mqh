@@ -104,7 +104,7 @@ bool GenerateRandomDays()
       g_Days[i] = intervalDays[randDay];
       intervalDays[randDay] = intervalDays[intervalDaysMark--];
       checkWeek = (int)MathMod(allDaysCnt+g_Days[i], 7);
-      if (checkWeek == 2 || checkWeek == 3)
+      if (checkWeek == 3 || checkWeek == 4)
          i--;
    }
    
