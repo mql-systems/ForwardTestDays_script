@@ -10,8 +10,8 @@ input datetime i_DtTestTo     = __DATE__;          // Test to
 input int      i_GenerateDays = 30;                // Generate days (min 10)
 
 //--- global variables
-int g_IntervalDaysCnt;
-int g_Days[];
+int      g_IntervalDaysCnt;
+datetime g_Days[];
 
 //+------------------------------------------------------------------+
 //| Script program start function                                    |
@@ -62,7 +62,7 @@ void OnStart()
    //--- save random days
    FileWrite(fileHandle, "Date", "Result (+)", "Result (-)", "Comments");
    for (int i=0; i<i_GenerateDays; i++)
-      FileWrite(fileHandle, TimeToString(i_DtTestFrom+(g_Days[i]*86400),TIME_DATE));
+      FileWrite(fileHandle, TimeToString(g_Days[i],TIME_DATE));
    
    FileClose(fileHandle);
    
@@ -90,9 +90,9 @@ bool GenerateRandomDays()
       return false;
    }
    
-   int i, randDay, checkWeek;
+   int i, randDay;
    int intervalDaysMark = g_IntervalDaysCnt-1;
-   int allDaysCnt = (int)MathFloor(i_DtTestFrom/86400);
+   MqlDateTime dtStruct;
    
    intervalDays[0] = g_IntervalDaysCnt;
    for (i=1; i<g_IntervalDaysCnt; i++)
@@ -101,10 +101,11 @@ bool GenerateRandomDays()
    for (i=0; i<i_GenerateDays; i++)
    {
       randDay = MathRandomBounds(0, intervalDaysMark);
-      g_Days[i] = intervalDays[randDay];
+      g_Days[i] = i_DtTestFrom+(intervalDays[randDay]*86400);
       intervalDays[randDay] = intervalDays[intervalDaysMark--];
-      checkWeek = (int)MathMod(allDaysCnt+g_Days[i], 7);
-      if (checkWeek == 3 || checkWeek == 4)
+      
+      TimeToStruct(g_Days[i], dtStruct);
+      if (dtStruct.day_of_week == 0 || dtStruct.day_of_week == 6)
          i--;
    }
    

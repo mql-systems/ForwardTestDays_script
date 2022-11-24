@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2022. Diamond Systems Corp."
 #property link      "https://github.com/mql-systems"
-#property version   "1.00"
+#property version   "1.01"
 #property script_show_inputs
 
 #include "ForwardTestDays.mqh"
