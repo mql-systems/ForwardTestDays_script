@@ -92,7 +92,7 @@ bool GenerateRandomDays()
    
    int i, randDay, checkWeek;
    int intervalDaysMark = g_IntervalDaysCnt-1;
-   int allDaysCnt = (int)MathFloor(i_DtTestTo/86400);
+   int allDaysCnt = (int)MathFloor(i_DtTestFrom/86400);
    
    intervalDays[0] = g_IntervalDaysCnt;
    for (i=1; i<g_IntervalDaysCnt; i++)
